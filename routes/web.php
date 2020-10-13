@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use \App\Http\Controllers\DogController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Dog
+Route::get('/dogs', [DogController::class, 'showAll']);
+Route::get('/dog/show/{id}', [DogController::class, 'find']);
+Route::get('/dog/create', [DogController::class, 'create']);
+Route::get('/dog/update/{id}', [DogController::class, 'update']);
+Route::get('/dog/delete/{id}', [DogController::class, 'delete']);
