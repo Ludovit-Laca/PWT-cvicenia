@@ -11,7 +11,8 @@ class DogController extends Controller
      * @param $id
      * @return mixed
      */
-    public function find($id) {
+    public function find($id)
+    {
         $dog = Dog::findOrFail($id);
 
         return $dog;
@@ -21,7 +22,8 @@ class DogController extends Controller
      * @return Dog
      * @throws \Exception
      */
-    public function create() {
+    public function create()
+    {
         /** @var Dog $dog */
         $dog = new Dog();
         $dog->name = str_random(5);
@@ -38,7 +40,8 @@ class DogController extends Controller
      * @param $id
      * @return mixed
      */
-    public function update($id) {
+    public function update($id)
+    {
         $dog = Dog::where('id', "=", $id)->firstOrFail();
         $dog->update(["breed" => str_random(10)]);
 
@@ -49,7 +52,8 @@ class DogController extends Controller
      * @param $id
      * @return string
      */
-    public function delete($id) {
+    public function delete($id)
+    {
         $dog = Dog::findOrFail($id);
         $dog->delete();
 
@@ -59,7 +63,8 @@ class DogController extends Controller
     /**
      * @return string
      */
-    public function showAll() {
+    public function showAll()
+    {
 
         $allDogs = "";
         $dogs = Dog::all();
