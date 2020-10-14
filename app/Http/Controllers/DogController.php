@@ -22,6 +22,7 @@ class DogController extends Controller
      * @throws \Exception
      */
     public function create() {
+        /** @var Dog $dog */
         $dog = new Dog();
         $dog->name = str_random(5);
         $dog->breed = str_random(10);
