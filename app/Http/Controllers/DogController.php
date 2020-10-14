@@ -7,13 +7,24 @@ use \DateTime;
 
 class DogController extends Controller
 {
-    public function find($id) {
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function find($id)
+    {
         $dog = Dog::findOrFail($id);
 
         return $dog;
     }
 
-    public function create() {
+    /**
+     * @return Dog
+     * @throws \Exception
+     */
+    public function create()
+    {
+        /** @var Dog $dog */
         $dog = new Dog();
         $dog->name = str_random(5);
         $dog->breed = str_random(10);
@@ -25,21 +36,35 @@ class DogController extends Controller
         return $dog;
     }
 
-    public function update($id) {
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function update($id)
+    {
         $dog = Dog::where('id', "=", $id)->firstOrFail();
         $dog->update(["breed" => str_random(10)]);
 
         return $dog;
     }
 
-    public function delete($id) {
+    /**
+     * @param $id
+     * @return string
+     */
+    public function delete($id)
+    {
         $dog = Dog::findOrFail($id);
         $dog->delete();
 
         return "Deleted dog with id: " . $id;
     }
 
-    public function showAll() {
+    /**
+     * @return string
+     */
+    public function showAll()
+    {
 
         $allDogs = "";
         $dogs = Dog::all();
