@@ -21,7 +21,18 @@ Route::get('/', function () {
 
 // Dog
 Route::get('/dogs', [DogController::class, 'showAll']);
-Route::get('/dog/show/{id}', [DogController::class, 'find']);
-Route::get('/dog/create', [DogController::class, 'create']);
-Route::get('/dog/update/{id}', [DogController::class, 'update']);
+Route::get('/dog/show/{id}', [DogController::class, 'findDog']);
+Route::post('/dog/create', [DogController::class, 'create']);
+Route::post('/dog/update/{id}', [DogController::class, 'update']);
 Route::get('/dog/delete/{id}', [DogController::class, 'delete']);
+
+Route::get('/create-form', [DogController::class, 'showInsertForm']);
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

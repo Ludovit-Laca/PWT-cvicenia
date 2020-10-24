@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dog;
 use \DateTime;
+use Illuminate\Http\Request;
 
 class DogController extends Controller
 {
@@ -11,41 +12,49 @@ class DogController extends Controller
      * @param $id
      * @return mixed
      */
-    public function find($id)
+    public function findDog($id)
     {
         $dog = Dog::findOrFail($id);
 
-        return $dog;
+        return view('updateDog', ['dog' => $dog]);
+    }
+
+    public function showInsertForm()
+    {
+        return view("addDog");
     }
 
     /**
      * @return Dog
      * @throws \Exception
      */
-    public function create()
+    public function create(Request $request)
     {
         /** @var Dog $dog */
         $dog = new Dog();
-        $dog->name = str_random(5);
-        $dog->breed = str_random(10);
-        $dog->birth_date = new DateTime();
+        $dog->name = $request->input('name');
+        $dog->breed = $request->input('breed');
+        $dog->birth_date = $request->input('birth_date');
         $dog->created_at = new DateTime();
         $dog->updated_at = new DateTime();
         $dog->save();
 
-        return $dog;
+        return redirect()->action([DogController::class, 'showAll']);
     }
 
     /**
      * @param $id
      * @return mixed
      */
-    public function update($id)
+    public function update($id, Request $request)
     {
-        $dog = Dog::where('id', "=", $id)->firstOrFail();
-        $dog->update(["breed" => str_random(10)]);
-
-        return $dog;
+        $dog = Dog::where('id', "=", $id)->first();
+        $dog->update([
+            'name' => $request->input('name'),
+            'breed' => $request->input('breed'),
+            'birth_date' => $request->input('birth_date')
+        ]);
+        return redirect()->action([DogController::class, 'showAll']);
     }
 
     /**
@@ -57,7 +66,7 @@ class DogController extends Controller
         $dog = Dog::findOrFail($id);
         $dog->delete();
 
-        return "Deleted dog with id: " . $id;
+        return redirect()->action([DogController::class, 'showAll']);
     }
 
     /**
@@ -65,12 +74,7 @@ class DogController extends Controller
      */
     public function showAll()
     {
-
-        $allDogs = "";
         $dogs = Dog::all();
-        foreach ($dogs as $dog) {
-            $allDogs = $allDogs . $dog->name . " " . $dog->breed . " " . $dog->birth_date . "<br>";
-        }
-        return $allDogs;
+        return view("showAllDogs", ['dogs' => $dogs]);
     }
 }
