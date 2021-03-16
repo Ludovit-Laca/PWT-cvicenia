@@ -1,9 +1,10 @@
 # Pokročilé webové technológie: Cvičenia
+Cieľom kurzu je oboznámiť študentov z pokročilými technológiami pri návrhu a vývoji webových aplikácií.
 
-## Cvičenie 2: Zadanie
+## Cvičenie 1: Zadanie
 Vytvoriť aplikáciu, ktorá bude schopná bez komplikovaného GUI, vykonávať CRUD(Create, Read, Update, Delete) operácie na ľubovolne zvolenou množinou dát.
 
-## Cvičenie 3: Zadanie
+## Cvičenie 2: Zadanie
  Cieľom je vytvoriť aplikáciu, ktorá bude obsahovať formátovaný layout a bude teda spĺňať celkovú koncepciu MVC. 
 
 ## Čo dokáže aplikácia? 
